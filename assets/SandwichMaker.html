@@ -1,0 +1,225 @@
+<html>
+  <head>
+    <title>thesis I guess</title>
+    <link rel="stylesheet" type="text/css" href="SandwichMaker_styles.css">
+
+    <script type="text/javascript">
+      function dragstart_handler(ev) {
+        console.log("drag started")
+        // Add the target element's id to the data transfer object
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+        ev.dropEffect = "move";
+      }
+
+      function dragover_handler(ev) {
+        ev.preventDefault();
+        // Set the dropEffect to move
+        ev.dataTransfer.dropEffect = "move"
+      }
+
+      function drop_handler(ev) {
+        console.log("dropped")
+        ev.preventDefault();
+
+        //get the slot that got dropped into
+        var working_slot = ev.target.id;
+        if(document.getElementById(working_slot).hasChildNodes()) {
+          //if there's already something dropped in the slot don't allow another thing to be dropped
+          return;
+        } else {
+          // Get the id of the target and add the moved element to the target's DOM
+          var data = ev.dataTransfer.getData("text/plain");
+          var test = document.createElement("img");
+          if(document.getElementById(data).src == "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread.png") {
+            test.src = "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png"
+          }
+          else {
+            test.src = document.getElementById(data).src;
+          }
+          test.className = "selected_gamepiece";
+
+          ev.target.appendChild(test);
+        }
+      }
+
+      function click_handler() {
+        console.log("clicked");
+        var hints = ["Aliens don't know that the peanut butter and jelly go inside the sandwich!",
+                           "Do you make food without washing your hands?",
+                           "What would happen if you switched the order of peanut butter and jelly?",
+                           "Do you put your food on a plate?",
+                           "When do you cut your sandwich?"];
+
+        //remove old hint node if there is one
+        var parent = document.getElementById("main-gamescreen");
+        var child = document.getElementById("hint_popup");
+
+        if(parent.contains(child))
+        {
+          console.log("removing old popup");
+          parent.removeChild(child);
+        }
+
+        //display a random hint when clicking rubber duck
+        var random_hint = hints[Math.floor(Math.random()*hints.length)];
+        var hint_div = document.createElement("div");
+        var hint_txt = document.createElement("p");
+        hint_txt.innerHTML = random_hint;
+        hint_div.appendChild(hint_txt);
+        hint_div.id = "hint_popup";
+
+        document.getElementById("main-gamescreen").appendChild(hint_div);
+        console.log(hint_div);
+        // alert(random_hint); //change this to a div beside the duck icon later
+      }
+
+      function check_instructions() {
+
+        //get list of user-given instructions
+        var user_inst = document.getElementsByClassName("selected_gamepiece");
+
+        //compare given instructions to set correct lists of instructions
+        var correct_steps1 = ["file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_sink.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_dish.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_jelly.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_peanutbutter.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_knife.png"];
+
+        var correct_steps2 = ["file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_sink.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_dish.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_peanutbutter.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_jelly.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_knife.png"];
+
+        var correct_steps3 = ["file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_sink.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_knife.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_peanutbutter.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_jelly.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_dish.png"];
+
+        var correct_steps4 = ["file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_sink.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_knife.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_jelly",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_peanutbutter.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_dish.png"];
+
+        var correct_steps5 = ["file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_sink.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_jelly.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_peanutbutter.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_dish.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_knife.png"];
+
+        var correct_steps6 = ["file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_sink.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_peanutbutter.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_jelly.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_bread_slice.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_dish.png",
+        "file:///C:/Users/mcusick/Desktop/SENIOR%20YEAR%20AHHHHHHH/THESIS/assets/asset_knife.png"];
+
+
+        var correct_options = [correct_steps1, correct_steps2, correct_steps3, correct_steps4, correct_steps5, correct_steps6];
+
+         var steps = ["", "", "", "", "", "", ""];
+         for(var i=0; i<steps.length; i++) {
+           //get ACTUAL list of user instructions
+           steps[i] = user_inst[i].getAttribute("src");
+           console.log("user given step #" + i + " = " + steps[i]);
+         }
+
+        //print array contents for testing
+        console.log(user_inst);
+        console.log(steps);
+
+        //with this method it's pointless to do the red/green thing bc too many options
+        if(steps.toString() != correct_steps1.toString() && steps.toString() != correct_steps2.toString() && steps.toString() != correct_steps3.toString() && steps.toString() != correct_steps4.toString() && steps.toString() != correct_steps5.toString()) {
+          alert("not quite...");
+        }
+        else {
+          alert ("you got them all right!");
+        }
+
+      }
+
+      function add_slot(ev) {
+        var existing_list = document.getElementById("slots");
+        var new_slot = document.createElement("li");
+
+        //object.ondragstart = function(){myScript};
+
+        new_slot.setAttribute("id", "added_step");
+        new_slot.setAttribute("class", "slot");
+
+        new_slot.ondrop = function(ev) {
+          drop_handler(ev);
+        };
+
+        new_slot.ondragover = function(ev) {
+          dragover_handler(ev);
+        };
+
+        existing_list.appendChild(new_slot);
+
+      }
+
+    </script>
+  </head>
+
+  <body>
+
+    <div id="inst">
+      <p>Help the alien make their favorite sandwich! Drag the icons for ingredients and actions to the empty instruction slots on the right.</p>
+      <p>Use the bread, peanut butter, jelly, and utensils.</p>
+      <p>Make sure you wash your hands!</p>
+      <p>Click the "+" at the bottom of the instruction slots to add another slot.</p>
+    </div>
+
+
+    <table>
+      <td id="main-gamescreen">
+        <img src="scene1_big-01.png" alt="main-screen" id="main-screen">
+
+        <img src="asset_peanutbutter.png" alt="peanutbutter" class="gamepiece" id="pb" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_jelly.png" alt="jelly" class="gamepiece" id="jelly" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_bread.png" alt="bread" class="gamepiece" id="bread" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_dish.png" alt="dish" class="gamepiece" id="dish" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_fork.png" alt="fork" class="gamepiece" id="fork" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_knife.png" alt="knife" class="gamepiece" id="knife" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_sink.png" alt="sink/wash" class="gamepiece" id="sink" draggable="true" ondragstart="dragstart_handler(event);">
+        <img src="asset_hint.png" alt="hint" class="gamepiece" id="hint" onclick="click_handler()">
+      </td>
+
+      <td id="drag-to-list">
+        <ul id="slots">
+            <li id="step1" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+            <li id="step2" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+            <li id="step3" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+            <li id="step4" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+            <li id="step5" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+            <li id="step6" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+            <li id="step7" class="slot" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+        </ul>
+
+        <table>
+          <td id="inner_L">
+            <button onclick="check_instructions()">Check my instructions</button>
+          </td>
+          <td id="inner_R">
+            <button onclick="add_slot(event)">+</button>
+          </td>
+        </table>
+      </td>
+    </table>
+
+  </body>
+</html>

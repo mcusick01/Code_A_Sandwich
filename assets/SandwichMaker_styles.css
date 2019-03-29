@@ -1,0 +1,159 @@
+/*page proportions*/
+body {
+  background: rgb(255, 255, 204);
+}
+
+table {
+  width: 100%;
+}
+
+table td {
+  padding: 0;
+  margin: 0;
+}
+
+td#main-gamescreen {
+  width: 79.5%;
+}
+
+td#main-gamescreen #main-screen {
+  width: 100%;
+}
+
+/*Instruction styles*/
+div#inst {
+  background: rgba(255, 230, 179, 0.5);
+  position: absolute;
+  top: 100;
+  left: 30;
+  width: 17%;
+  padding: 15px;
+}
+
+div#inst p {
+  word-wrap: break-word;
+  text-align: center;
+}
+
+
+/*list properties*/
+td#drag-to-list ul{
+  height: 500px;
+  padding-left: 10%;
+  list-style: none;
+  overflow-y: scroll;
+}
+
+td#drag-to-list ul li {
+  height: 50px;
+  margin: 9%;
+  margin-left: 0;
+  display: flex;
+  justify-content: center;
+  background: rgba(255, 230, 179, 0.5);
+}
+
+/*game piece properties*/
+img.gamepiece {
+  position: absolute;
+  width: 50px;
+}
+
+img#fork {
+  width: 22px;
+}
+
+img#knife {
+  width: 16px;
+}
+
+img#bread {
+  width: 180px;
+}
+
+img#dish {
+  width: 100px;
+}
+
+img#sink {
+  width: 120px;
+}
+
+/*game piece initial positions*/
+img#pb {
+  top: 65;
+  left: 540;
+}
+
+img#jelly {
+  top: 65;
+  left: 600;
+}
+
+img#bread {
+  top: 66;
+  left: 660;
+}
+
+img#dish {
+  top: 155;
+  left: 535;
+}
+
+img#fork {
+  top: 165;
+  left: 650;
+}
+
+img#knife {
+  top: 165;
+  left: 675;
+}
+
+img#sink {
+  top: 220;
+  left: 875;
+}
+
+img#hint {
+  top: 20;
+  left: 20;
+}
+
+.selected_gamepiece {
+  height: 100%;
+}
+
+/*button styles*/
+td#inner_L {
+  padding-left: 10%;
+}
+
+button {
+  width: auto;
+  padding: 10px 15px;
+  border: none;
+  background: rgba(255, 230, 179, 0.5);
+}
+
+button:hover{
+  background: rgba(255, 230, 179);
+  cursor: pointer;
+}
+
+/*animations*/
+.gamepiece:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+div#hint_popup {
+    background: rgba(255, 230, 179, 0.5);
+    position: absolute;
+    top: 20px;
+    left: 75px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
